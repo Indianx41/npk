@@ -60,6 +60,8 @@ var getCredentials = function() {
 function getHashcatParams(manifest) {
 
 	var params = [
+		"-1 \"/root/hashcat/charsets/DES_full.hcchr\"",
+		"--hex-charset",
 		"--quiet",
 		"-O",
 		"-o",
