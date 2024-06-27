@@ -1483,7 +1483,7 @@ angular
         hashFile: $scope.selectedHashes[0].Key.split('/').slice(1).join('/'),
         hashFileUrl: "...",
         hashType: $scope.hashType,
-        netlm: $scope.netLM,
+        netLM: $scope.netLM,
         instanceCount: $scope.instanceCount,
         instanceDuration: $scope.instanceDuration,
         priceTarget: $scope.totalPrice
