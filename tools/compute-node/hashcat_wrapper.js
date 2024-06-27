@@ -59,9 +59,11 @@ var getCredentials = function() {
 
 function getHashcatParams(manifest) {
 
-	var params = [
-		"-1 \"/root/hashcat/charsets/DES_full.hcchr\"",
+	var params = (manifest.netLM ? [
+		"-1",
+		"/root/hashcat/charsets/DES_full.hcchr",
 		"--hex-charset",
+	] : []).concat([
 		"--quiet",
 		"-O",
 		"-o",
@@ -80,7 +82,7 @@ function getHashcatParams(manifest) {
 		"--status-json",
 		"--status-timer",
 		"30"
-	];
+	]);
 
 	if (manifest.manualArguments) {
 		console.log("Adding manual arguments:", manifest.manualArguments.split(" "));

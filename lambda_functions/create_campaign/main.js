@@ -153,6 +153,11 @@ exports.main = async function(event, context, callback) {
 
 	verifiedManifest.hashType = campaign.hashType;
 
+	if (!(campaign.netLM === true || campaign.netLM === false)) {
+		return respond(400, {}, "netlm flag " + campaign.netLM + " is not a valid boolean", false);
+	}
+	verifiedManifest.netLM = campaign.netLM;
+
 	if (parseInt(campaign.instanceCount) < 1) {
 		return respond(400, {}, "instanceCount must be greater than 1", false);
 	}

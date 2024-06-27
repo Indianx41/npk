@@ -668,6 +668,7 @@ angular
     // window.campaignCtrl = $scope;
 
     $scope.hashType = 1000;
+    $scope.netLM = false;
     $scope.showAll = false;
     $scope.showAdvanced = false;
     $scope.disabled = true;
@@ -722,6 +723,10 @@ angular
 
       $scope.updateTotalKeyspace();
       $scope.buildSliders();
+    }
+
+    $scope.setNetLM = function(netLMActive) {
+      $scope.netLM = netLMActive;
     }
 
     $scope.setFamilySortOrder = function(method) {
@@ -1132,10 +1137,15 @@ angular
         "-w",
         "4",
         "-m",
-        $scope.hashType,
-        "-a",
-        $scope.attackType,
-      ];
+        $scope.hashType
+      ].concat($scope.netLM ? [
+          "-1",
+          "/root/hashcat/charsets/DES_full.hcchr",
+          "--hex-charset",
+      ] : []).concat([
+          "-a",
+          $scope.attackType,
+      ]);
 
       if ($scope.attackType == 0) {
         $scope.selectedRules.forEach(function(e) {
@@ -1473,6 +1483,7 @@ angular
         hashFile: $scope.selectedHashes[0].Key.split('/').slice(1).join('/'),
         hashFileUrl: "...",
         hashType: $scope.hashType,
+        netlm: $scope.netLM,
         instanceCount: $scope.instanceCount,
         instanceDuration: $scope.instanceDuration,
         priceTarget: $scope.totalPrice
